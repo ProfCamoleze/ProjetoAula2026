@@ -1,0 +1,4 @@
+repository "ProjetoAula2026/ProjetoAula2026@4673584887864@cloud"
+  path "/"
+    br "/main"
+    co "/main"
