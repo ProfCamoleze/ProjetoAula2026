@@ -1,64 +1,56 @@
 using UnityEngine;
 
-public class PlataformaMovel : MonoBehaviour
+public class PlataformaMover : MonoBehaviour
 {
-
-    //Definir a posição dos pontos A e B
+    [Header("Pontos da plataforma")]
     public Transform pontoA;
     public Transform pontoB;
-    public bool entrei=true;
 
-    //Definir a velocidade de movimento da plataforma
+    [Header("Movimento")]
     public float velocidade = 2f;
 
-    Transform posAtual; //guarda o ponto de destino Atual
+    private Vector3 destino;
 
-    Rigidbody2D rig; //fisica da plataforma, será usada para mover a plataforma
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rig = GetComponent<Rigidbody2D>();
-        posAtual = pontoB; //definir o ponto de destino inicial como o ponto B
+        destino = pontoB.position;
     }
 
-
-    void FixedUpdate() // como vamos usar a fisica para mover é melhor usar o FixedUpdate
+    void Update()
     {
-        Vector2 novaPosicao = Vector2.MoveTowards(rig.position, posAtual.position, velocidade * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            destino,
+            velocidade * Time.deltaTime
+        );
 
-        rig.MovePosition(novaPosicao); // faz a fisica se mover
-
-        if (Vector2.Distance(novaPosicao, posAtual.position) < 0.05f) // verifica se chegou  ao destino
+        if (Vector3.Distance(transform.position, pontoB.position) < 0.05f)
         {
-            if (posAtual == pontoA) //esse if verifica em qual ponto esta e define o novo destino
-            {
-                posAtual = pontoB;
-            }
-            else
-            {
-                posAtual = pontoA;
-            }
+            destino = pontoA.position;
+        }
+        else if (Vector3.Distance(transform.position, pontoA.position) < 0.05f)
+        {
+            destino = pontoB.position;
         }
     }
-    //faz o player "colar na Plataforma
+
     private void OnTriggerEnter2D(Collider2D colidir)
     {
-        if (colidir.gameObject.CompareTag("Pe"))
+        if (colidir.CompareTag("Pe"))
         {
-            entrei = true;
-            colidir.transform.SetParent(transform);
-
+            Transform player = colidir.transform.parent;
+                player.SetParent(transform, true);
+            
         }
     }
-    //faz "descolar" da plataforma
     private void OnTriggerExit2D(Collider2D colidir)
     {
-        if (colidir.gameObject.CompareTag("Pe"))
+        if (colidir.CompareTag("Pe"))
         {
-            entrei = true;
-            colidir.transform.SetParent(null);
+            // Pega o pai do objeto Pe, que continua sendo o Player
+            Transform player = colidir.transform.parent;
+             player.SetParent(null, true);
+            
         }
-
     }
-
 }
