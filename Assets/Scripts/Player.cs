@@ -1,98 +1,120 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [Header("Movimento")] //cabeçalho
+    [Header("Movimento")]
     public float velocidade = 5f;
     Rigidbody2D rig;
     Vector2 mover;
-    PlayerControle controle;
+    PlayerControle controles;
 
     [Header("Pulo")]
     public float forcaPulo = 6f;
+    public int maximoPulos = 2;
+    public int pulosRestantes;
 
-    bool ehChao; //gUarda SE ESTOU OU NÃO NO CHÃO
-    public Transform ehPe; //guardar a posição do pé do personagem
-    public LayerMask chao; //guarda a camada do chão
-    public float raioPe = 0.2f; //guarda o raio do pé do personagem
+    [Header("Chão (Ground Check)")]
+    public Transform groundCheck;
+    public float raioGroundCheck = 0.2f;
+    public LayerMask layerGround;
+    private bool estaNoChao;
 
-    Animator anime;
+    Animator anim;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    void Start()
+    private void Awake()
     {
-       rig= GetComponent<Rigidbody2D>();
-       anime= GetComponent<Animator>();
+        rig = GetComponent<Rigidbody2D>();
+        controles = new PlayerControle();
+        anim = GetComponent<Animator>();
     }
-    void Awake()
+
+    private void OnEnable()
     {
-        controle = new PlayerControle();
+        controles.Enable();
     }
-    void OnEnable()
-    {
-        controle.Enable();
-    }
+
     void OnDisable()
     {
-        controle.Disable();
+        controles.Disable();
     }
 
-    // Update is called once per frame
-    void Update() //executa a cada frame
+    void Update()
     {
-        mover = controle.Player.Move.ReadValue<Vector2>();
-        ehChao= Physics2D.OverlapCircle(ehPe.position, raioPe, chao);
-      
-        if (controle.Player.Jump.WasPressedThisFrame() && ehChao)
+        mover = controles.Player.Move.ReadValue<Vector2>();
+
+        estaNoChao = Physics2D.OverlapCircle(
+            groundCheck.position,
+            raioGroundCheck,
+            layerGround
+        );
+
+        if (controles.Player.Jump.WasPressedThisFrame())
         {
-           rig.AddForce(Vector2.up * forcaPulo, ForceMode2D.Impulse);
+            Pular();
         }
 
-       
-
-        if (mover.x > 0)
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        else if (mover.x < 0)
-            transform.rotation = Quaternion.Euler(0f, 180f, 0f);  
-        animar();
-    }
-    private void FixedUpdate() //executa em um valor fixo, 50 X / segundo
-    {
-        rig.linearVelocityX=mover.x * velocidade;
-    }
-
-    void animar()
-    {
-        anime.SetFloat("andar",Mathf.Abs(rig.linearVelocityX));
-        if (ehChao)
+        if (estaNoChao)
         {
-            anime.SetBool("pular", false);
-            anime.SetBool("cair", false);
+            pulosRestantes = maximoPulos;
+        }
+
+        if (mover.x > 0.01f)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else if (mover.x < -0.01f)
+        {
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+
+        AtualizarAnimacoes();
+    }
+
+    private void FixedUpdate()
+    {
+        rig.linearVelocityX = mover.x * velocidade;
+    }
+
+    private void Pular()
+    {
+        pulosRestantes--;
+
+        if (pulosRestantes > 0)
+        {
+            rig.linearVelocityY = 0f;
+            rig.AddForce(Vector2.up * forcaPulo, ForceMode2D.Impulse);
+        }
+    }
+
+    private void AtualizarAnimacoes()
+    {
+        anim.SetFloat("andar", Mathf.Abs(rig.linearVelocity.x));
+
+        if (estaNoChao)
+        {
+            anim.SetBool("pular", false);
+            anim.SetBool("cair", false);
         }
         else
-            if (rig.linearVelocity.y > 0.1f) 
+        {
+            if (rig.linearVelocity.y > 0.1f)
             {
-               anime.SetBool("pular", true);
-                anime.SetBool("cair", false);
+                anim.SetBool("pular", true);
+                anim.SetBool("cair", false);
             }
             else if (rig.linearVelocity.y < -0.1f)
             {
-                anime.SetBool("pular", false);
-                anime.SetBool("cair", true);
+                anim.SetBool("pular", false);
+                anim.SetBool("cair", true);
             }
-     }
-    private void OnDrawGizmos()
-    {
-   
-        // Linha azul do Player até o ponto do pé
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(transform.position, ehPe.position);
+        }
+    }
 
-        // Círculo amarelo no ponto do pé
+    void OnDrawGizmosSelected()
+    {
+        if (groundCheck == null) return;
+
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(ehPe.position, raioPe);
+        Gizmos.DrawWireSphere(groundCheck.position, raioGroundCheck);
     }
 }
