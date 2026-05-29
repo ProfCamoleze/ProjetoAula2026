@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
     {
         anim.SetFloat("andar", Mathf.Abs(rig.linearVelocity.x));
 
-        if (estaNoChao  )
+        if (estaNoChao)
         {
             anim.SetBool("pular", false);
             anim.SetBool("cair", false);
