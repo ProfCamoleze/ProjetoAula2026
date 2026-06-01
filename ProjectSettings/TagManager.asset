@@ -8,6 +8,7 @@ TagManager:
   - armadilha
   - pocao
   - pegar
+  - inimigo
   layers:
   - Default
   - TransparentFX

@@ -49,7 +49,7 @@ public class PlataformaMover : MonoBehaviour
         {
             // Pega o pai do objeto Pe, que continua sendo o Player
             Transform player = colidir.transform.parent;
-             player.SetParent(null, true);
+             player.SetParent(null);
             
         }
     }

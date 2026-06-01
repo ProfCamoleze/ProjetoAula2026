@@ -44,7 +44,7 @@ public class PlataformaRotativa : MonoBehaviour
         if (colidir.CompareTag("Pe"))
         {
             Transform player = colidir.transform.parent;
-            player.SetParent(null, true);
+            player.SetParent(null);
         }
     }
 }

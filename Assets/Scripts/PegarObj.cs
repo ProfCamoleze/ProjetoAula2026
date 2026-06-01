@@ -16,6 +16,7 @@ public class SegurarObjeto : MonoBehaviour
     private GameObject objetoSegurado; // Guarda o objeto que o player já está carregando
     private bool estaSegurando = false;
 
+    
     private void Awake()
     {
         // Localiza a ação dentro do asset
