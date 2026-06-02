@@ -9617,13 +9617,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   velocidade: 5
   forcaPulo: 6
-  maximoPulos: 2
-  pulosRestantes: 0
-  groundCheck: {fileID: 1952425959}
-  raioGroundCheck: 0.1
-  layerGround:
+  qtdPulos: 2
+  checkChao: {fileID: 1952425959}
+  raioCheckChao: 0.2
+  oqueEchao:
     serializedVersion: 2
     m_Bits: 128
+  velocidadeDash: 18
+  duracaoDash: 0.15
+  cooldownDash: 0.6
 --- !u!70 &1254604158
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
