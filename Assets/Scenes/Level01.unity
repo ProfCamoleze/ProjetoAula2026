@@ -6991,7 +6991,7 @@ Transform:
   m_GameObject: {fileID: 182281793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.99, y: 1.96, z: -10}
+  m_LocalPosition: {x: 24.6, y: 1.58, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7962,7 +7962,7 @@ Transform:
   m_GameObject: {fileID: 359790043}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.99, y: 1.96, z: -10}
+  m_LocalPosition: {x: 24.6, y: 1.58, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8471,6 +8471,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695453908}
   m_CullTransparentMesh: 1
+--- !u!1 &778605762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 778605763}
+  m_Layer: 0
+  m_Name: Disparo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &778605763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778605762}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1254604154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &789854449
 GameObject:
   m_ObjectHideFlags: 0
@@ -9494,6 +9525,7 @@ GameObject:
   - component: {fileID: 1254604158}
   - component: {fileID: 1254604159}
   - component: {fileID: 1254604160}
+  - component: {fileID: 1254604162}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -9568,12 +9600,13 @@ Transform:
   m_GameObject: {fileID: 1254604152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.99, y: 1.96, z: 0}
+  m_LocalPosition: {x: 24.6, y: 1.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1952425959}
   - {fileID: 1533642224}
+  - {fileID: 778605763}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1254604156
@@ -9626,6 +9659,9 @@ MonoBehaviour:
   velocidadeDash: 18
   duracaoDash: 0.15
   cooldownDash: 0.6
+  corFantasma: {r: 0.4, g: 0.7, b: 1, a: 0.6}
+  intervaloFantasma: 0.04
+  tempoSumirFantasma: 0.3
 --- !u!70 &1254604158
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -9724,6 +9760,21 @@ MonoBehaviour:
   tempoInvencivel: 1
   spritePlayer: {fileID: 1254604153}
   gameOver: {fileID: 1209874687}
+--- !u!114 &1254604162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254604152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24269643d8d97494aab592e13d7a161f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AtaqueProjetil
+  pontoDisparo: {fileID: 778605763}
+  prefabProjetil: {fileID: 2611072644419627261, guid: 9eac9d6ab0b806d418ca861369db660b, type: 3}
+  tempoEntreTiros: 0.3
 --- !u!1 &1293835141
 GameObject:
   m_ObjectHideFlags: 0
@@ -10191,6 +10242,7 @@ GameObject:
   - component: {fileID: 1605962128}
   - component: {fileID: 1605962132}
   - component: {fileID: 1605962133}
+  - component: {fileID: 1605962134}
   m_Layer: 0
   m_Name: Inimigo
   m_TagString: inimigo
@@ -10374,6 +10426,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1605962134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605962127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465db952e01517842ab783d803440650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VidaInimigo
+  vidaMaxima: 1
 --- !u!1 &1609981921
 GameObject:
   m_ObjectHideFlags: 0
