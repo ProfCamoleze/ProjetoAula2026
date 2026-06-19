@@ -1,7 +1,5 @@
 using UnityEngine;
 
-// Garante que o objeto possua um Rigidbody2D.
-// Caso o componente não exista, a Unity adicionará automaticamente.
 
 public class Inimigo: MonoBehaviour
 {
@@ -47,6 +45,7 @@ public class Inimigo: MonoBehaviour
         }
 
         // Converte a posição do Player para Vector2.
+
         Vector2 posicaoPlayer = player.position;
 
         // Mede a distância entre o inimigo e o Player.
