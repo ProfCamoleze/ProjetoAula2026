@@ -36,7 +36,7 @@ public class VidaPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("armadilha") || collision.CompareTag("inimigo"))
+        if (collision.CompareTag("armadilha") )
         {
             TomarDano(1);
         }
