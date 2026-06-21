@@ -7,20 +7,23 @@ TagManager:
   - Pe
   - armadilha
   - pocao
+  - pegar
+  - inimigo
+  - ataque
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 
   - chao
   - Paredes
-  - 
-  - 
-  - 
-  - 
+  - Armadilha
+  - PlataformaCaindo
+  - Ataque
+  - Inimigo
   - 
   - 
   - 

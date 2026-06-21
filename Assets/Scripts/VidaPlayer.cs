@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class VidaPlayer : MonoBehaviour
 {
@@ -23,15 +24,19 @@ public class VidaPlayer : MonoBehaviour
     [Header("Efeito Visual Opcional")]
     public SpriteRenderer spritePlayer;
 
+    [Header("Game OVER")]
+    public GameObject gameOver;
+
     private void Start()
     {
         vidaAtual = vidaMaxima;
         AtualizarCorações();
+        Time.timeScale = 1f; // Certifique-se de que o tempo está normal no início do jogo
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("armadilha") || collision.CompareTag("inimigo"))
+        if (collision.CompareTag("armadilha") )
         {
             TomarDano(1);
         }
@@ -126,12 +131,14 @@ public class VidaPlayer : MonoBehaviour
 
     private void Morrer()
     {
-        Debug.Log("Player morreu!");
+        gameOver.SetActive(true);
+        Time.timeScale = 0f; // Pausa o jogo
+    }
 
-        // Aqui você pode chamar uma tela de Game Over,
-        // reiniciar a fase ou desativar o player.
-
-        gameObject.SetActive(false);
+    public void restart()
+    {
+        Time.timeScale = 1f; // Reinicia o tempo
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Recarrega a cena atual
     }
 
     // Ganhar vida
@@ -146,7 +153,7 @@ public class VidaPlayer : MonoBehaviour
 
          if (vidaAtual > vidaMaxima)
             {
-                vidaAtual = vidaMaxima;
+                vidaAtual +=1;
             }
 
      AtualizarCorações();
