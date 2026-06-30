@@ -7015,7 +7015,7 @@ Transform:
   m_GameObject: {fileID: 182281793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.29087, y: 2.37954, z: -10}
+  m_LocalPosition: {x: 1.1, y: -1.18, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7146,7 +7146,7 @@ GameObject:
   - component: {fileID: 218941533}
   m_Layer: 7
   m_Name: Caixa
-  m_TagString: pegar
+  m_TagString: Pegar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8020,7 +8020,7 @@ Transform:
   m_GameObject: {fileID: 359790043}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.11, y: 2.38, z: -10}
+  m_LocalPosition: {x: 1.1, y: -1.18, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9744,14 +9744,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1254604154}
   - component: {fileID: 1254604153}
+  - component: {fileID: 1254604158}
   - component: {fileID: 1254604156}
   - component: {fileID: 1254604157}
   - component: {fileID: 1254604161}
-  - component: {fileID: 1254604158}
-  - component: {fileID: 1254604160}
   - component: {fileID: 1254604162}
   - component: {fileID: 1254604163}
   - component: {fileID: 1254604164}
+  - component: {fileID: 1254604165}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -9826,7 +9826,7 @@ Transform:
   m_GameObject: {fileID: 1254604152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.11, y: 2.38, z: 0}
+  m_LocalPosition: {x: 1.1, y: -1.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9926,22 +9926,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0059998035, y: -0.12825412}
   m_Size: {x: 0.6220045, y: 0.73451424}
   m_Direction: 0
---- !u!114 &1254604160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254604152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1b62c62b717e4d4d8fe699b39b5d4d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PegarObj
-  assetDeInput: {fileID: -944628639613478452, guid: cf4d54a1055ea924ea45acf0e9626c1b, type: 3}
-  nomeMapaAcao: Player
-  nomeAcao: Interact
-  posicaoDaMao: {fileID: 1533642224}
 --- !u!114 &1254604161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9972,7 +9956,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254604152}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24269643d8d97494aab592e13d7a161f, type: 3}
   m_Name: 
@@ -9987,7 +9971,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254604152}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a518e7f6bc7528418b81bd36d72f21e, type: 3}
   m_Name: 
@@ -10019,6 +10003,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1254604165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254604152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b62c62b717e4d4d8fe699b39b5d4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SegurarObjeto
+  posicaoDaMao: {fileID: 1533642224}
 --- !u!1 &1293835141
 GameObject:
   m_ObjectHideFlags: 0
@@ -10487,9 +10484,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1533642224}
-  m_Layer: 0
+  - component: {fileID: 1533642225}
+  m_Layer: 13
   m_Name: Mao
-  m_TagString: pegar
+  m_TagString: Mao
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10509,6 +10507,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1254604154}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1533642225
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533642223}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.048193723, y: -0.16385885}
+  m_Radius: 0.12408857
 --- !u!1 &1542279435
 GameObject:
   m_ObjectHideFlags: 0

@@ -76,3 +76,7 @@ crashlytics-build.properties
 *.slnx
 .plastic/plastic.wktree
 ProjetoAula2026.slnx
+ProjectSettings/EditorBuildSettings.asset
+ProjectSettings/ProjectSettings.asset
+ProjectSettings/ShaderGraphSettings.asset
+ProjetoAula2026.slnx

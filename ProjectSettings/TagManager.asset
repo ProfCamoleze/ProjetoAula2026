@@ -10,6 +10,8 @@ TagManager:
   - pegar
   - inimigo
   - ataque
+  - Mao
+  - Pegar
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - PlataformaCaindo
   - Ataque
   - Inimigo
-  - 
+  - pegar
   - 
   - 
   - 
