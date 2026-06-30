@@ -1,122 +1,106 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class SegurarObjeto : MonoBehaviour
+public class PegarObj : MonoBehaviour
 {
-    [Header("Configurações de Input")]
-    [SerializeField] private InputActionAsset assetDeInput;
-    [SerializeField] private string nomeMapaAcao = "Player";
-    [SerializeField] private string nomeAcao = "Interact";
+    [Header("Configuração da Mão")]
+    public Transform posicaoDaMao;
 
-    [Header("Mecânica de Segurar")]
-    [SerializeField] private Transform posicaoDaMao; // Ponto onde o objeto vai ficar preso
+    private PlayerControle controle;
 
-    private InputAction acaoInteragir;
-    private GameObject objetoTocado; // Guarda o objeto em que o player está encostado
-    private GameObject objetoSegurado; // Guarda o objeto que o player já está carregando
-    private bool estaSegurando = false;
+    private GameObject objetoProximo;
+    private GameObject objetoNaMao;
 
-    
+    private bool segurandoObjeto = false;
+
     private void Awake()
     {
-        // Localiza a ação dentro do asset
-        var mapaAcao = assetDeInput.FindActionMap(nomeMapaAcao);
-        if (mapaAcao != null)
+        controle = new PlayerControle();
+
+        if (posicaoDaMao == null)
         {
-            acaoInteragir = mapaAcao.FindAction(nomeAcao);
+            posicaoDaMao = transform;
         }
     }
 
     private void OnEnable()
     {
-        // Ativa a ação diretamente, sem usar += ou -=
-        if (acaoInteragir != null)
-        {
-            acaoInteragir.Enable();
-        }
+        controle.Enable();
     }
 
     private void OnDisable()
     {
-        // Desativa a ação diretamente, sem usar += ou -=
-        if (acaoInteragir != null)
-        {
-            acaoInteragir.Disable();
-        }
+        controle.Disable();
     }
 
     private void Update()
     {
-        // Verifica se o botão foi pressionado neste frame
-        if (acaoInteragir != null && acaoInteragir.WasPressedThisFrame())
+        if (controle.Player.Interact.WasPressedThisFrame())
         {
-            if (estaSegurando)
+            if (segurandoObjeto)
             {
-                SoltarOObjeto();
+                SoltarObjeto();
             }
             else
             {
-                TentarSegurarOObjeto();
+                Pegar();
             }
         }
     }
 
-    private void TentarSegurarOObjeto()
+    private void Pegar()
     {
-        // Só tenta segurar se o player estiver encostado em algum objeto válido
-        if (objetoTocado != null)
+        if (objetoProximo != null)
         {
-            objetoSegurado = objetoTocado;
-            estaSegurando = true;
+            objetoNaMao = objetoProximo;
+            segurandoObjeto = true;
 
-            // Faz o objeto virar "filho" da mão do player para acompanhar o movimento
-            objetoSegurado.transform.SetParent(posicaoDaMao);
-            objetoSegurado.transform.localPosition = Vector3.zero;
+            objetoNaMao.transform.SetParent(posicaoDaMao);
+            objetoNaMao.transform.localPosition = Vector3.zero;
 
-            // Desativa a física para o objeto não colidir com o próprio player enquanto é carregado
-            if (objetoSegurado.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+            Rigidbody2D rigObjeto = objetoNaMao.GetComponent<Rigidbody2D>();
+
+            if (rigObjeto != null)
             {
-                rb.simulated = false;
+                rigObjeto.linearVelocity = Vector2.zero;
+                rigObjeto.angularVelocity = 0f;
+                rigObjeto.simulated = false;
             }
         }
     }
 
-    private void SoltarOObjeto()
+    private void SoltarObjeto()
     {
-        if (objetoSegurado != null)
+        if (objetoNaMao != null)
         {
-            // Remove o vínculo de "filho", devolvendo o objeto para o cenário
-            objetoSegurado.transform.SetParent(null);
+            objetoNaMao.transform.SetParent(null);
 
-            // Reativa a física do objeto para ele voltar a cair e interagir com o mundo
-            if (objetoSegurado.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+            Rigidbody2D rigObjeto = objetoNaMao.GetComponent<Rigidbody2D>();
+
+            if (rigObjeto != null)
             {
-                rb.simulated = true;
+                rigObjeto.simulated = true;
             }
 
-            objetoSegurado = null;
-            estaSegurando = false;
+            objetoNaMao = null;
+            segurandoObjeto = false;
         }
     }
 
-    // Detecta quando o Player encosta no colisor do objeto
     private void OnTriggerEnter2D(Collider2D outro)
     {
-        if (outro.CompareTag("pegar"))
+        if (outro.CompareTag("Pegar"))
         {
-            objetoTocado = outro.gameObject;
+            objetoProximo = outro.gameObject;
         }
     }
 
-    // Detecta quando o Player se afasta e para de encostar no objeto
     private void OnTriggerExit2D(Collider2D outro)
     {
-        if (outro.CompareTag("pegar"))
+        if (outro.CompareTag("Pegar"))
         {
-            // Se o objeto que nos afastamos era o que estávamos tocando, limpa a referência
-            if (outro.gameObject == objetoTocado)
+            if (outro.gameObject == objetoProximo)
             {
-                objetoTocado = null;
+                objetoProximo = null;
             }
         }
     }
