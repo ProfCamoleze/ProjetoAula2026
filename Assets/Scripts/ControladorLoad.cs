@@ -1,135 +1,148 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ControladorLoad : MonoBehaviour
 {
-    [Header("Painéis")]
-    public CanvasGroup painelLoad;
-    public CanvasGroup painelFadePreto;
 
-    [Header("Conteúdo do Load")]
-    public Image imagemLoad;
-    public TextMeshProUGUI textoLoad;
+    [Header("Imagens")]
+    public Image imgLoadAtual;
+    public Image imgLoadProxima;
 
+    [Header("Transparência das Imagens")]
+    public CanvasGroup grupoAtual;
+    public CanvasGroup grupoProxima;
+
+    [Header("Imagens da Sequência")]
     public Sprite[] imagensLoad;
-
-    [TextArea]
-    public string[] textosLoad;
 
     [Header("Barra de Progresso")]
     public Slider barraProgresso;
 
+    [Header("Fade Final")]
+    public CanvasGroup painelFade;
+
     [Header("Configurações")]
-    public float tempoMinimoDeLoad = 3f;
+    public string nomeCenaJogo = "Jogo";
+    public float tempoEntreImagens = 2f;
+    public float velocidadeTransicao = 2f;
     public float velocidadeFade = 2f;
 
     private void Start()
     {
-        PrepararPainel(painelLoad, true);
-        PrepararPainel(painelFadePreto, true);
+        Time.timeScale = 1f;
 
-        painelFadePreto.alpha = 0f;
+        PrepararTela();
 
-        StartCoroutine(RotinaCarregarCena());
+        StartCoroutine(CarregarCena());
     }
 
-    private IEnumerator RotinaCarregarCena()
+    private void PrepararTela()
     {
-        string nomeProximaCena = PlayerPrefs.GetString("ProximaCena", "Jogo");
+        if (grupoAtual != null)
+            grupoAtual.alpha = 1f;
 
-        MostrarConteudoAleatorio();
+        if (grupoProxima != null)
+            grupoProxima.alpha = 0f;
 
-        AsyncOperation carregamento = SceneManager.LoadSceneAsync(nomeProximaCena);
+        if (painelFade != null)
+            painelFade.alpha = 0f;
 
-        if (carregamento == null)
-        {
-            Debug.LogError("Cena não encontrada: " + nomeProximaCena);
-            yield break;
-        }
+        if (barraProgresso != null)
+            barraProgresso.value = 0f;
+
+        if (imagensLoad.Length > 0 && imgLoadAtual != null)
+            imgLoadAtual.sprite = imagensLoad[0];
+    }
+
+    private IEnumerator CarregarCena()
+    {
+        AsyncOperation carregamento = SceneManager.LoadSceneAsync(nomeCenaJogo);
 
         carregamento.allowSceneActivation = false;
 
-        float tempoAtual = 0f;
+        yield return StartCoroutine(MostrarImagens());
 
-        while (tempoAtual < tempoMinimoDeLoad || carregamento.progress < 0.9f)
+        while (carregamento.progress < 0.9f)
         {
-            tempoAtual += Time.deltaTime;
-
-            if (barraProgresso != null)
-            {
-                barraProgresso.value = Mathf.Clamp01(carregamento.progress / 0.9f);
-            }
-
             yield return null;
         }
 
         if (barraProgresso != null)
-        {
             barraProgresso.value = 1f;
-        }
 
-        yield return StartCoroutine(FazerFade(painelFadePreto, 0f, 1f));
+        yield return StartCoroutine(FazerFadeFinal());
 
         carregamento.allowSceneActivation = true;
     }
 
-    private void MostrarConteudoAleatorio()
+    private IEnumerator MostrarImagens()
     {
-        if (imagemLoad != null && imagensLoad.Length > 0)
-        {
-            int indiceImagem = Random.Range(0, imagensLoad.Length);
-            imagemLoad.sprite = imagensLoad[indiceImagem];
-        }
+        int totalImagens = imagensLoad.Length;
 
-        if (textoLoad != null && textosLoad.Length > 0)
+        if (totalImagens == 0)
         {
-            int indiceTexto = Random.Range(0, textosLoad.Length);
-            textoLoad.text = textosLoad[indiceTexto];
-        }
-    }
-
-    private IEnumerator FazerFade(CanvasGroup painel, float inicio, float fim)
-    {
-        if (painel == null)
-        {
+            yield return new WaitForSeconds(1f);
             yield break;
         }
 
+        for (int i = 0; i < totalImagens; i++)
+        {
+            if (i == 0)
+            {
+                imgLoadAtual.sprite = imagensLoad[i];
+            }
+            else
+            {
+                imgLoadProxima.sprite = imagensLoad[i];
+
+                grupoProxima.alpha = 0f;
+
+                yield return StartCoroutine(FazerTransicaoImagem());
+
+                imgLoadAtual.sprite = imagensLoad[i];
+
+                grupoAtual.alpha = 1f;
+                grupoProxima.alpha = 0f;
+            }
+
+            if (barraProgresso != null)
+                barraProgresso.value = (float)(i + 1) / totalImagens;
+
+            yield return new WaitForSeconds(tempoEntreImagens);
+        }
+    }
+
+    private IEnumerator FazerTransicaoImagem()
+    {
         float tempo = 0f;
-        painel.alpha = inicio;
 
         while (tempo < 1f)
         {
-            tempo += Time.deltaTime * velocidadeFade;
-            painel.alpha = Mathf.Lerp(inicio, fim, tempo);
+            tempo += Time.deltaTime * velocidadeTransicao;
+
+            grupoProxima.alpha = Mathf.Lerp(0f, 1f, tempo);
 
             yield return null;
         }
 
-        painel.alpha = fim;
+        grupoProxima.alpha = 1f;
     }
 
-    private void PrepararPainel(CanvasGroup painel, bool mostrar)
+    private IEnumerator FazerFadeFinal()
     {
-        if (painel == null)
+        float tempo = 0f;
+
+        while (tempo < 1f)
         {
-            return;
+            tempo += Time.deltaTime * velocidadeFade;
+
+            painelFade.alpha = Mathf.Lerp(0f, 1f, tempo);
+
+            yield return null;
         }
 
-        if (mostrar)
-        {
-            painel.alpha = 1f;
-            painel.interactable = true;
-            painel.blocksRaycasts = true;
-        }
-        else
-        {
-            painel.alpha = 0f;
-            painel.interactable = false;
-            painel.blocksRaycasts = false;
-        }
+        painelFade.alpha = 1f;
     }
 }
