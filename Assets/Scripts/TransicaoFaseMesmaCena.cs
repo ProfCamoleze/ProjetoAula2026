@@ -1,15 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class TransicaoFaseMesmaCena : MonoBehaviour
 {
-    [Header("Painéis")]
+  /*  [Header("Painï¿½is")]
     public CanvasGroup painelTransicao;
     public CanvasGroup painelFadePreto;
 
-    [Header("Conteúdo da transição")]
+    [Header("Conteï¿½do da transiï¿½ï¿½o")]
     public Image imagemTransicao;
     public Sprite[] imagensTransicao;
 
@@ -26,11 +27,11 @@ public class TransicaoFaseMesmaCena : MonoBehaviour
     [Header("Tempos")]
     public float tempoMostrandoTransicao = 3f;
     public float velocidadeFade = 1.5f;
-
     [Header("Som")]
     public AudioSource fonteAudio;
     public AudioClip somTransicao;
     public AudioClip somFimTransicao;
+
 
     private void Start()
     {
@@ -95,23 +96,17 @@ public class TransicaoFaseMesmaCena : MonoBehaviour
         }
     }
 
-    private void MostrarDicaAleatoria()
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
         if (textoDica != null && dicas.Length > 0)
         {
             int indice = Random.Range(0, dicas.Length);
             textoDica.text = dicas[indice];
         }
-    }
 
-    private void TocarSom(AudioClip som)
-    {
-        if (fonteAudio != null && som != null)
-        {
-            fonteAudio.PlayOneShot(som);
-        }
     }
-
     private IEnumerator FazerFade(CanvasGroup painel, float inicio, float fim)
     {
         if (painel == null)
@@ -132,7 +127,15 @@ public class TransicaoFaseMesmaCena : MonoBehaviour
 
         painel.alpha = fim;
     }
-
+  
+    // Update is called once per frame
+    void Update()
+    {
+        if (fonteAudio != null && som != null)
+        {
+            fonteAudio.PlayOneShot(som);
+        }
+    }
     private void PrepararPainel(CanvasGroup painel, bool mostrar)
     {
         if (painel == null)
@@ -152,5 +155,8 @@ public class TransicaoFaseMesmaCena : MonoBehaviour
             painel.interactable = false;
             painel.blocksRaycasts = false;
         }
-    }
+
+    */
 }
+
+

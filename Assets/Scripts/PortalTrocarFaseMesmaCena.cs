@@ -21,7 +21,7 @@ public class PortalTrocarFaseMesmaCena : MonoBehaviour
         {
             jaEntrou = true;
 
-            controladorTransicao.IniciarTransicao(colisao.transform, pontoDestino);
+           // controladorTransicao.IniciarTransicao(colisao.transform, pontoDestino);
         }
     }
 }
