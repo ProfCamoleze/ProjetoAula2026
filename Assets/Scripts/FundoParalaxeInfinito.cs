@@ -1,7 +1,7 @@
 using UnityEngine;
 
-// Este script deve ser colocado no objeto PAI
-// de cada camada do fundo.
+// Coloque este script no objeto PAI
+// de cada camada de fundo.
 //
 // Exemplo:
 // Fundo01_MuitoDistante
@@ -17,41 +17,49 @@ public class FundoParalaxeInfinito : MonoBehaviour
     [Tooltip("Arraste aqui a Main Camera do jogo.")]
     [SerializeField] private Camera cameraDoJogo;
 
-    [Tooltip("Arraste os três painéis desta camada: esquerda, centro e direita.")]
+    [Tooltip("Arraste os três painéis desta camada.")]
     [SerializeField] private SpriteRenderer[] paineis;
 
 
     [Header("Paralaxe Horizontal")]
 
-    [Tooltip("Quanto maior o valor, mais a camada acompanha a câmera e mais distante ela parece.")]
+    [Tooltip("Quanto maior o valor, mais distante a camada parece.")]
     [Range(0f, 1f)]
     [SerializeField] private float fatorX = 0.8f;
 
 
     [Header("Paralaxe Vertical")]
 
-    [Tooltip("Ative se quiser que esta camada também acompanhe o movimento vertical da câmera.")]
+    [Tooltip("Ative caso queira paralaxe também no eixo Y.")]
     [SerializeField] private bool usarParalaxeY = false;
 
-    [Tooltip("Quanto maior o valor, mais a camada acompanha a câmera no eixo Y.")]
     [Range(0f, 1f)]
     [SerializeField] private float fatorY = 0.8f;
 
 
-    // Posição da câmera quando o jogo começa.
+    // Referência da câmera usada no cálculo do paralaxe.
     private Vector3 posicaoInicialCamera;
 
-    // Posição desta camada quando o jogo começa.
+    // Posição inicial desta camada.
     private Vector3 posicaoInicialCamada;
 
-    // Largura de um painel no mundo.
+    // Guarda a posição local original da camada.
+    private Vector3 posicaoLocalOriginalCamada;
+
+    // Guarda as posições locais originais dos painéis.
+    private Vector3[] posicoesLocaisOriginaisPaineis;
+
+    // Largura de um painel.
     private float larguraPainel;
 
-    // Quantidade total de painéis.
+    // Quantidade de painéis.
     private int quantidadePaineis;
 
+    // Indica se o sistema já foi preparado.
+    private bool preparado = false;
 
-    private void Start()
+
+    private void Awake()
     {
         PrepararCamera();
 
@@ -67,11 +75,28 @@ public class FundoParalaxeInfinito : MonoBehaviour
             return;
         }
 
-        // Guarda a posição inicial da câmera.
-        posicaoInicialCamera = cameraDoJogo.transform.position;
+        // Guarda a posição LOCAL criada no Editor.
+        posicaoLocalOriginalCamada = transform.localPosition;
 
-        // Guarda a posição inicial desta camada.
-        posicaoInicialCamada = transform.position;
+        // Cria espaço para guardar a posição original dos painéis.
+        posicoesLocaisOriginaisPaineis =
+            new Vector3[paineis.Length];
+
+        // Guarda a posição LOCAL original de cada painel.
+        for (int i = 0; i < paineis.Length; i++)
+        {
+            posicoesLocaisOriginaisPaineis[i] =
+                paineis[i].transform.localPosition;
+        }
+
+        preparado = true;
+    }
+
+
+    private void Start()
+    {
+        // Na fase inicial, apenas cria a referência normal.
+        ReiniciarReferencia(false);
     }
 
 
@@ -84,9 +109,6 @@ public class FundoParalaxeInfinito : MonoBehaviour
             cameraDoJogo = Camera.main;
         }
 
-
-        // Se ainda não encontrou uma câmera,
-        // o script não pode continuar.
         if (cameraDoJogo == null)
         {
             Debug.LogError(
@@ -99,8 +121,6 @@ public class FundoParalaxeInfinito : MonoBehaviour
             return;
         }
 
-
-        // Este sistema foi criado para câmera Orthographic.
         if (!cameraDoJogo.orthographic)
         {
             Debug.LogError(
@@ -115,11 +135,10 @@ public class FundoParalaxeInfinito : MonoBehaviour
 
     private void PrepararPaineis()
     {
-        // Verifica se o array existe.
-        if (paineis == null || paineis.Length == 0)
+        if (paineis == null || paineis.Length < 3)
         {
             Debug.LogError(
-                "FundoParalaxeInfinito: nenhum painel foi configurado.",
+                "FundoParalaxeInfinito: configure pelo menos três painéis.",
                 this
             );
 
@@ -128,45 +147,6 @@ public class FundoParalaxeInfinito : MonoBehaviour
             return;
         }
 
-
-        // Para este sistema precisamos de pelo menos três painéis.
-        if (paineis.Length < 3)
-        {
-            Debug.LogError(
-                "FundoParalaxeInfinito: utilize pelo menos três painéis.",
-                this
-            );
-
-            enabled = false;
-
-            return;
-        }
-
-
-        // Verifica se o primeiro painel existe.
-        if (paineis[0] == null)
-        {
-            Debug.LogError(
-                "FundoParalaxeInfinito: o primeiro painel não foi configurado.",
-                this
-            );
-
-            enabled = false;
-
-            return;
-        }
-
-
-        // Descobre automaticamente a largura
-        // real ocupada pelo primeiro sprite no mundo.
-        larguraPainel = paineis[0].bounds.size.x;
-
-
-        // Guarda quantos painéis existem.
-        quantidadePaineis = paineis.Length;
-
-
-        // Verifica todos os elementos do array.
         foreach (SpriteRenderer painel in paineis)
         {
             if (painel == null)
@@ -181,42 +161,42 @@ public class FundoParalaxeInfinito : MonoBehaviour
                 return;
             }
         }
+
+        // Descobre automaticamente a largura real do primeiro painel.
+        larguraPainel = paineis[0].bounds.size.x;
+
+        quantidadePaineis = paineis.Length;
     }
 
 
     private void LateUpdate()
     {
-        // Primeiro movimentamos a camada
-        // para criar o efeito de paralaxe.
+        if (!preparado)
+        {
+            return;
+        }
+
         AtualizarParalaxe();
 
-
-        // Depois verificamos se algum painel
-        // saiu completamente da câmera.
         AtualizarFundoInfinito();
     }
 
 
     private void AtualizarParalaxe()
     {
-        // Descobre quanto a câmera se deslocou
-        // desde o começo do jogo.
+        // Calcula quanto a câmera se deslocou
+        // desde a última referência.
         Vector3 deslocamentoCamera =
             cameraDoJogo.transform.position -
             posicaoInicialCamera;
 
 
-        // Calcula o deslocamento horizontal da camada.
         float movimentoX =
             deslocamentoCamera.x * fatorX;
 
 
-        // Por padrão não existe movimento vertical.
         float movimentoY = 0f;
 
-
-        // Se o paralaxe vertical estiver ativado,
-        // calcula também o eixo Y.
         if (usarParalaxeY)
         {
             movimentoY =
@@ -224,7 +204,7 @@ public class FundoParalaxeInfinito : MonoBehaviour
         }
 
 
-        // Move o objeto-pai da camada.
+        // Move a camada a partir da referência da fase atual.
         transform.position =
             posicaoInicialCamada +
             new Vector3(
@@ -237,32 +217,29 @@ public class FundoParalaxeInfinito : MonoBehaviour
 
     private void AtualizarFundoInfinito()
     {
-        // Descobre a metade da altura
-        // que a câmera consegue enxergar.
+        // Metade da altura que a câmera enxerga.
         float metadeAlturaCamera =
             cameraDoJogo.orthographicSize;
 
 
-        // A largura depende da altura
-        // e da proporção atual da câmera.
+        // Metade da largura visível da câmera.
         float metadeLarguraCamera =
             metadeAlturaCamera *
             cameraDoJogo.aspect;
 
 
-        // Descobre a borda esquerda visível.
+        // Limite esquerdo da câmera.
         float limiteEsquerdoCamera =
             cameraDoJogo.transform.position.x -
             metadeLarguraCamera;
 
 
-        // Descobre a borda direita visível.
+        // Limite direito da câmera.
         float limiteDireitoCamera =
             cameraDoJogo.transform.position.x +
             metadeLarguraCamera;
 
 
-        // Verifica cada painel separadamente.
         foreach (SpriteRenderer painel in paineis)
         {
             RepetirPainel(
@@ -280,16 +257,12 @@ public class FundoParalaxeInfinito : MonoBehaviour
         float limiteDireitoCamera
     )
     {
-        // Distância total ocupada por todos
-        // os painéis lado a lado.
         float distanciaReposicionamento =
             larguraPainel *
             quantidadePaineis;
 
 
-        // Se a borda direita do painel estiver
-        // à esquerda da câmera,
-        // significa que ele saiu completamente da tela.
+        // Saiu completamente pela esquerda.
         while (painel.bounds.max.x < limiteEsquerdoCamera)
         {
             painel.transform.position +=
@@ -298,14 +271,51 @@ public class FundoParalaxeInfinito : MonoBehaviour
         }
 
 
-        // Se a borda esquerda do painel estiver
-        // à direita da câmera,
-        // significa que ele saiu completamente da tela.
+        // Saiu completamente pela direita.
         while (painel.bounds.min.x > limiteDireitoCamera)
         {
             painel.transform.position -=
                 Vector3.right *
                 distanciaReposicionamento;
         }
+    }
+
+
+    // Chamado pelo GerenciadorFases
+    // quando o Player muda para outra região da mesma Scene.
+    public void ReiniciarReferencia(bool restaurarPosicoes = true)
+    {
+        if (!preparado)
+        {
+            return;
+        }
+
+
+        // Ao trocar de fase, restaura a camada
+        // para a posição configurada originalmente no Editor.
+        if (restaurarPosicoes)
+        {
+            transform.localPosition =
+                posicaoLocalOriginalCamada;
+
+
+            // Restaura também os três painéis.
+            for (int i = 0; i < paineis.Length; i++)
+            {
+                paineis[i].transform.localPosition =
+                    posicoesLocaisOriginaisPaineis[i];
+            }
+        }
+
+
+        // A posição ATUAL da câmera passa a ser
+        // o novo ponto zero do paralaxe.
+        posicaoInicialCamera =
+            cameraDoJogo.transform.position;
+
+
+        // Guarda onde a camada está agora.
+        posicaoInicialCamada =
+            transform.position;
     }
 }
