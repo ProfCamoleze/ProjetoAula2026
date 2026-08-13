@@ -27,7 +27,7 @@ TagManager:
   - Ataque
   - Inimigo
   - pegar
-  - 
+  - Background
   - 
   - 
   - 
@@ -46,8 +46,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backgound
+    uniqueID: 3031358857
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   m_RenderingLayers:
   - Default
+  - Backgound
