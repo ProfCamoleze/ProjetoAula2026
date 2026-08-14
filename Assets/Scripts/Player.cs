@@ -95,16 +95,14 @@ public class Player : MonoBehaviour
         if (mover.x > 0.01f)
         {
             // Vira para a direita.
-            transform.rotation =
-                Quaternion.Euler(0f, 0f, 0f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
             Direcao = 1f;
         }
         else if (mover.x < -0.01f)
         {
             // Vira para a esquerda.
-            transform.rotation =
-                Quaternion.Euler(0f, 180f, 0f);
+            transform.rotation =    Quaternion.Euler(0f, 180f, 0f);
 
             Direcao = -1f;
         }

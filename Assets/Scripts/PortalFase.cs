@@ -4,13 +4,11 @@ public class PortalFase : MonoBehaviour
 {
     [Header("Gerenciador de fases")]
 
-    [Tooltip("Arraste aqui o GerenciadorFases.")]
     [SerializeField] private GerenciadorFases gerenciadorFases;
 
 
     [Header("Destino")]
 
-    [Tooltip("Índice da fase de destino. Fase01 = 0, Fase02 = 1, Fase03 = 2...")]
     [SerializeField] private int indiceFaseDestino = 1;
 
 
@@ -24,9 +22,7 @@ public class PortalFase : MonoBehaviour
         {
             // Solicita ao gerenciador
             // a troca para a fase escolhida.
-            gerenciadorFases.IrParaFase(
-                indiceFaseDestino
-            );
+            gerenciadorFases.IrParaFase(indiceFaseDestino);
         }
     }
 }
