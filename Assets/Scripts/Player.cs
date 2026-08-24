@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     [Header("Movimento")]
     public float velocidade = 5f;
+    public bool podeMover = true;
 
     Rigidbody2D rig;
     Vector2 mover;
@@ -61,32 +62,34 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Lê a movimentação do jogador.
-        mover = controle.Player.Move.ReadValue<Vector2>();
-
-
-        // Verifica se o Player está tocando o chão.
-        ehchao = Physics2D.OverlapCircle(
-            checkChao.position,
-            raioCheckChao,
-            oqueEchao
-        );
-
-
-        // -------------------------
-        // PULO
-        // -------------------------
-
-        if (controle.Player.Jump.WasPressedThisFrame() && qtdPulos > 1)
+        if (podeMover)
         {
-            qtdPulos--;
+            mover = controle.Player.Move.ReadValue<Vector2>();
 
-            pular();
-        }
-        else if (ehchao)
-        {
-            qtdPulos = 2f;
-        }
 
+            // Verifica se o Player está tocando o chão.
+            ehchao = Physics2D.OverlapCircle(
+                checkChao.position,
+                raioCheckChao,
+                oqueEchao
+            );
+
+
+            // -------------------------
+            // PULO
+            // -------------------------
+
+            if (controle.Player.Jump.WasPressedThisFrame() && qtdPulos > 1)
+            {
+                qtdPulos--;
+
+                pular();
+            }
+            else if (ehchao)
+            {
+                qtdPulos = 2f;
+            }
+        }
 
         // -------------------------
         // DIREÇÃO DO PLAYER
@@ -119,8 +122,11 @@ public class Player : MonoBehaviour
     {
         // Se outro sistema estiver controlando
         // o movimento, não alteramos a velocidade.
-        if (movimentoBloqueado)
+        if (movimentoBloqueado && !podeMover)
+        {
+            rig.linearVelocityX = 0f; rig.linearVelocityY = 0f;
             return;
+        }
 
 
         // Movimento horizontal normal.
@@ -128,6 +134,17 @@ public class Player : MonoBehaviour
             mover.x * velocidade;
     }
 
+    public void bloquearMovimento()
+    {
+        podeMover = false;
+        mover = Vector2.zero;
+        rig.linearVelocityX = 0f;
+    }
+
+    public void liberarMovimento()
+    {
+        podeMover = true;
+    }
 
     void pular()
     {
