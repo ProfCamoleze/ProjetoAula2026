@@ -17,7 +17,7 @@ MonoBehaviour:
     retrato: {fileID: -2419971920513260168, guid: e362bc6a7c79fce4db16d145d43a5550, type: 3}
     texto: "Ol\xE1 !!"
   - nomePersonagem: NPC
-    retrato: {fileID: -4455822056875728695, guid: 4de760c38ab41314bbdcfb6943023452, type: 3}
+    retrato: {fileID: 0}
     texto: "Ol\xE1, como voce esta ?"
   - nomePersonagem: Player
     retrato: {fileID: -2419971920513260168, guid: e362bc6a7c79fce4db16d145d43a5550, type: 3}

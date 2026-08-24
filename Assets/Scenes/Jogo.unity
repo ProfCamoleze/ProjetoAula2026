@@ -5188,7 +5188,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 81666637}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 588890457}
+        m_TargetAssemblyTypeName: GerenciadorDialogo, Assembly-CSharp
+        m_MethodName: ContinuarDialogo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &81666637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5244,7 +5256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &112719470
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17521,9 +17533,10 @@ GameObject:
   - component: {fileID: 1444609893}
   - component: {fileID: 1444609892}
   - component: {fileID: 1444609895}
-  m_Layer: 12
+  - component: {fileID: 1444609896}
+  m_Layer: 0
   m_Name: Teste
-  m_TagString: inimigo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17558,7 +17571,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -17654,11 +17667,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444609891}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa9971026358b634194e9c4118a553b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &1444609896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444609891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626dc5abd2255da469f9f82e33726dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogoNPC
+  dialogo: {fileID: 11400000, guid: 17cb91a954c21814d8cc8f4c05caca92, type: 2}
+  gerenciadorDialogo: {fileID: 588890457}
 --- !u!1 &1453120441
 GameObject:
   m_ObjectHideFlags: 0
@@ -18318,7 +18345,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1597171731}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 588890457}
+        m_TargetAssemblyTypeName: GerenciadorDialogo, Assembly-CSharp
+        m_MethodName: FecharDialogo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1597171731
 MonoBehaviour:
   m_ObjectHideFlags: 0

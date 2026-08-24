@@ -26,7 +26,7 @@ public class GerenciadorDialogo : MonoBehaviour
         dialogoAtual = dialogo;
         indiceFala = 0;
 
-       // player.BloquearMovimento();
+       player.bloquearMovimento();
         painelDialogo.SetActive(true);
 
         MostrarFala();
@@ -58,6 +58,6 @@ public class GerenciadorDialogo : MonoBehaviour
     public void FecharDialogo()
     {
         painelDialogo.SetActive(false);
-       // player.LiberarMovimento();
+       player.liberarMovimento();
     }
 }
