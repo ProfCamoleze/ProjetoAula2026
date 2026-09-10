@@ -8519,6 +8519,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMinimapa
   player: {fileID: 1254604154}
+  cameraMinimapa: {fileID: 324179628}
+  limitesCamera:
+  - {fileID: 1609981922}
+  - {fileID: 894974750}
   posicaoZ: -10
 --- !u!1 &348163867
 GameObject:
