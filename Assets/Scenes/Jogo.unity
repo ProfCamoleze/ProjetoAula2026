@@ -4383,7 +4383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 42759574}
   - component: {fileID: 42759575}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7481,7 +7481,7 @@ GameObject:
   m_Component:
   - component: {fileID: 251617100}
   - component: {fileID: 251617101}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fundo02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7973,7 +7973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 272985872}
   - component: {fileID: 272985873}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8368,6 +8368,158 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &324179624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 324179625}
+  - component: {fileID: 324179628}
+  - component: {fileID: 324179627}
+  - component: {fileID: 324179626}
+  - component: {fileID: 324179629}
+  m_Layer: 0
+  m_Name: CameraMiniMapa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &324179625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324179624}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1, y: -1.2, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1327670898}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &324179626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324179624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
+--- !u!81 &324179627
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324179624}
+  m_Enabled: 1
+--- !u!20 &324179628
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324179624}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 15
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 16287
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 8400000, guid: 82141ba01580b274d807a84c6a0ef96f, type: 2}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!114 &324179629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324179624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cfb8047b4c272429c2e9c70d657b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraMinimapa
+  player: {fileID: 1254604154}
+  posicaoZ: -10
 --- !u!1 &348163867
 GameObject:
   m_ObjectHideFlags: 0
@@ -8378,7 +8530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 348163868}
   - component: {fileID: 348163869}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8547,7 +8699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 367378624}
   - component: {fileID: 367378625}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8637,7 +8789,7 @@ GameObject:
   m_Component:
   - component: {fileID: 385602478}
   - component: {fileID: 385602479}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelCentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8727,7 +8879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 395260963}
   - component: {fileID: 395260964}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11615,7 +11767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 512886025}
   - component: {fileID: 512886026}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fundo03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11670,7 +11822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 518742161}
   - component: {fileID: 518742162}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelCentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12119,7 +12271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 571236023}
   - component: {fileID: 571236024}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelCentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12209,7 +12361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 575750513}
   - component: {fileID: 575750514}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelCentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12299,7 +12451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 585579733}
   - component: {fileID: 585579734}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fundo03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12353,7 +12505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 588992618}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12670,7 +12822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 671514838}
   - component: {fileID: 671514839}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fundo01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12753,8 +12905,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -718.4264, y: 483.78418}
-  m_SizeDelta: {x: -1614.026, y: -1006.9402}
+  m_AnchoredPosition: {x: -718.2197, y: 483.78418}
+  m_SizeDelta: {x: -1614.4395, y: -1006.9402}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &695453910
 MonoBehaviour:
@@ -13195,7 +13347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 801550588}
   - component: {fileID: 801550589}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelCentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13412,7 +13564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 811298926}
   - component: {fileID: 811298927}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13950,6 +14102,7 @@ RectTransform:
   - {fileID: 1209874688}
   - {fileID: 1589679534}
   - {fileID: 18637817}
+  - {fileID: 1261844446}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -21396,7 +21549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1040801758}
   - component: {fileID: 1040801759}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21618,7 +21771,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1114757620}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Background (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21655,7 +21808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1117137163}
   - component: {fileID: 1117137164}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21897,7 +22050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1161697550}
   - component: {fileID: 1161697551}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22063,7 +22216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1228596760}
   - component: {fileID: 1228596761}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fundo05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22118,7 +22271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1237289603}
   - component: {fileID: 1237289604}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22208,7 +22361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1243785427}
   - component: {fileID: 1243785428}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelCentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22431,6 +22584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   velocidade: 5
+  podeMover: 1
   forcaPulo: 6
   qtdPulos: 2
   checkChao: {fileID: 1952425959}
@@ -22584,6 +22738,82 @@ MonoBehaviour:
   corFantasma: {r: 0.4, g: 0.7, b: 1, a: 0.6}
   intervaloFantasma: 0.04
   tempoSumirFantasma: 0.3
+--- !u!1 &1261844445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1261844446}
+  - component: {fileID: 1261844448}
+  - component: {fileID: 1261844447}
+  m_Layer: 5
+  m_Name: PMiniMapa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1261844446
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261844445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1782409880}
+  m_Father: {fileID: 915904759}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 241.78, y: -235.3163}
+  m_SizeDelta: {x: 305.56, y: 285.1526}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1261844447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261844445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.90588236}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1261844448
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261844445}
+  m_CullTransparentMesh: 1
 --- !u!1 &1293835141
 GameObject:
   m_ObjectHideFlags: 0
@@ -22663,6 +22893,7 @@ Transform:
   m_Children:
   - {fileID: 742583086}
   - {fileID: 547425569}
+  - {fileID: 324179625}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1380537100
@@ -22984,7 +23215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462487037}
   - component: {fileID: 1462487038}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fundo04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23481,7 +23712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1559730440}
   - component: {fileID: 1559730441}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23970,7 +24201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1633646440}
   - component: {fileID: 1633646441}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelCentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24443,7 +24674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1651001958}
   - component: {fileID: 1651001959}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24533,7 +24764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1667556539}
   - component: {fileID: 1667556540}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fundo04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24677,7 +24908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1673341553}
   - component: {fileID: 1673341554}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fundo01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24732,7 +24963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1726104967}
   - component: {fileID: 1726104968}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24822,7 +25053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1730960742}
   - component: {fileID: 1730960743}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelCentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24902,6 +25133,78 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1782409879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1782409880}
+  - component: {fileID: 1782409882}
+  - component: {fileID: 1782409881}
+  m_Layer: 5
+  m_Name: ImagemMiniMapa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1782409880
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782409879}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1261844446}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1.5643e-10, y: 0.00016212}
+  m_SizeDelta: {x: 305.56, y: 285.15}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1782409881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782409879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 82141ba01580b274d807a84c6a0ef96f, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1782409882
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782409879}
+  m_CullTransparentMesh: 1
 --- !u!1 &1786882694
 GameObject:
   m_ObjectHideFlags: 0
@@ -24912,7 +25215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786882695}
   - component: {fileID: 1786882696}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelCentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25002,7 +25305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1791210004}
   - component: {fileID: 1791210005}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fundo05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25057,7 +25360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1793897175}
   - component: {fileID: 1793897176}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25147,7 +25450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1813090307}
   - component: {fileID: 1813090308}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25237,7 +25540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1826925210}
   - component: {fileID: 1826925211}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26686,7 +26989,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1989094191}
   - component: {fileID: 1989094192}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fundo02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26772,7 +27075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1992995860}
   - component: {fileID: 1992995861}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelCentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26862,7 +27165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1996409392}
   - component: {fileID: 1996409393}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27030,7 +27333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2025577333}
   - component: {fileID: 2025577334}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27270,7 +27573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2067719876}
   - component: {fileID: 2067719877}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27360,7 +27663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2102589928}
   - component: {fileID: 2102589929}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PainelDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
