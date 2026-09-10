@@ -8353,7 +8353,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GerenciadorControles
   controlesMobile: {fileID: 18637816}
-  testarControlesMobile: 1
 --- !u!4 &319052784
 Transform:
   m_ObjectHideFlags: 0
