@@ -77,7 +77,7 @@ public class Dash : MonoBehaviour
         // INICIAR DASH
         // -------------------------
 
-        if (controle.Player.Sprint.WasPressedThisFrame() && podeDash && !emDash)
+        if (controle.Player.Sprint.WasPressedThisFrame() && podeDash && !emDash && player.podeMover)
         {
             iniciarDash();
         }
@@ -120,12 +120,9 @@ public class Dash : MonoBehaviour
         // COOLDOWN
         // -------------------------
 
-        if (!podeDash && !emDash)
-        {
+        if (!podeDash && !emDash)        {
             contadorCooldown -= Time.deltaTime;
-
-
-            if (contadorCooldown <= 0f)
+                                 if (contadorCooldown <= 0f)
             {
                 podeDash = true;
             }

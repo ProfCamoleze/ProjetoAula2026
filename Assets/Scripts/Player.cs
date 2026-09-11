@@ -68,11 +68,7 @@ public class Player : MonoBehaviour
 
 
             // Verifica se o Player está tocando o chão.
-            ehchao = Physics2D.OverlapCircle(
-                checkChao.position,
-                raioCheckChao,
-                oqueEchao
-            );
+            ehchao = Physics2D.OverlapCircle(checkChao.position, raioCheckChao, oqueEchao);
 
 
             // -------------------------
@@ -105,7 +101,7 @@ public class Player : MonoBehaviour
         else if (mover.x < -0.01f)
         {
             // Vira para a esquerda.
-            transform.rotation =    Quaternion.Euler(0f, 180f, 0f);
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
 
             Direcao = -1f;
         }
@@ -118,18 +114,13 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Se outro sistema estiver controlando
-        // o movimento, não alteramos a velocidade.
-        if (movimentoBloqueado && !podeMover)
+        if (movimentoBloqueado)
         {
-            rig.linearVelocityX = 0f; rig.linearVelocityY = 0f;
             return;
         }
 
-
-        // Movimento horizontal normal.
-        rig.linearVelocityX =
-            mover.x * velocidade;
+        // Movimento normal.
+        rig.linearVelocityX =    mover.x * velocidade;
     }
 
     public void bloquearMovimento()
